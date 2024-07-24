@@ -1,0 +1,17 @@
+#第一次使用需要安装包
+install.packages('SDMTools')
+#加载包
+library(SDMTools)
+library(raster)
+
+#设置路径
+setwd("/Users/Desktop/教程1案例数据/") ##修改为你的文件存储路径
+#加载城市地表覆盖类型图的栅格文件
+r_0=raster('splited raster/landcovermap20000.tif',values=T)
+#计算景观格局指数，cellsize为一个pixel代表的真实尺寸（单位为米）
+patch=PatchStat(r_0,cellsize=279.8) 
+class=ClassStat(r_0,cellsize=279.8)
+
+#存储结果为csv文件
+write.table(patch, file="patchresult_0.csv",append=F,sep=",",row.names =F,col.names = T)
+write.table(patch, file="classresult_0.csv",append=F,sep=",",row.names =F,col.names = T)
